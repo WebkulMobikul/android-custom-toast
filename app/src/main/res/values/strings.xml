@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">WebkulCustomToast</string>
+    <string name="my_dummy_text"> Dummy Toast Text</string>
+
+</resources>

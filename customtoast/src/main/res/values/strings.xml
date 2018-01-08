@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">CustomToast</string>
+    <string name="success_message">The process is successful</string>
+    <string name="error_message">There has been some error</string>
+    <string name="warning_message">Something is wrong. Please check</string>
+    <string name="toast_message">Here\'s a message</string>
+</resources>
