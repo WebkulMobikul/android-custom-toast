@@ -52,6 +52,53 @@ public class CustomToast extends Toast {
         mBinding = DataBindingUtil.inflate(LayoutInflater.from(mContext), R.layout.custom_toast_layout,null,false);
     }
 
+    public static float convertDpToPixel(float dp, Context context) {
+        Resources resources = context.getResources();
+        DisplayMetrics metrics = resources.getDisplayMetrics();
+        return dp * ((float) metrics.densityDpi / DisplayMetrics.DENSITY_DEFAULT);
+    }
+
+    public static CustomToast getInstantToast(@NonNull Context context, @NonNull InstantToastType type) {
+        CustomToast customToast = new CustomToast(context);
+        customToast.setIconPosition(IconPosition.START);
+        customToast.setToastPosition(ToastPosition.BOTTOM);
+        customToast.setToastBackground(ToastBackgroundType.ROUNDED_CORNERS);
+        customToast.setToastTextColor(Color.WHITE);
+        switch (type) {
+            case SUCCESS:
+                customToast.setToastText(R.string.success_message);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    customToast.setToastIcon(context.getResources().getDrawable(R.drawable.ic_vector_custom_toast_success_icon, null));
+                } else {
+                    customToast.setToastIcon(context.getResources().getDrawable(R.drawable.ic_vector_custom_toast_success_icon));
+                }
+                customToast.setToastBackgroundColor(Color.parseColor("#21c23c"));
+                break;
+            case ERROR:
+                customToast.setToastText(R.string.error_message);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    customToast.setToastIcon(context.getResources().getDrawable(R.drawable.ic_vector_custom_toast_error_icon, null));
+                } else {
+                    customToast.setToastIcon(context.getResources().getDrawable(R.drawable.ic_vector_custom_toast_error_icon));
+                }
+                customToast.setToastBackgroundColor(Color.parseColor("#ff5858"));
+                break;
+            case WARNING:
+                customToast.setToastText(R.string.warning_message);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    customToast.setToastIcon(context.getResources().getDrawable(R.drawable.ic_vector_custom_toast_warning_icon, null));
+                } else {
+                    customToast.setToastIcon(context.getResources().getDrawable(R.drawable.ic_vector_custom_toast_warning_icon));
+                }
+                customToast.setToastBackgroundColor(Color.parseColor("#ffa21c"));
+                break;
+            case NORMAL:
+                customToast.setToastText(R.string.toast_message);
+                break;
+        }
+        return customToast;
+    }
+
     @Override
     public void show() {
         if (mToastIcon !=null) {
@@ -77,7 +124,11 @@ public class CustomToast extends Toast {
 
 
         if (mToastBackground != null){
-            mBinding.getRoot().setBackground(mToastBackground);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                mBinding.getRoot().setBackground(mToastBackground);
+            } else {
+                mBinding.getRoot().setBackgroundDrawable(mToastBackground);
+            }
         }
 
         if (mToastBackgroundColor != 0) {
@@ -111,7 +162,6 @@ public class CustomToast extends Toast {
         return this;
     }
 
-
     public CustomToast setToastText(@StringRes int text){
         mToastText =mContext.getString(text);
         return this;
@@ -124,11 +174,8 @@ public class CustomToast extends Toast {
 
     @Override
     public void setText(CharSequence text) throws RuntimeException {
-        RuntimeException re = new RuntimeException("try using setToastText() instead of setText()");
-        throw re;
+        throw new RuntimeException("try using setToastText() instead of setText()");
     }
-
-
 
     public CustomToast setToastBackground(Drawable drawable){
         mToastBackground =  drawable;
@@ -144,6 +191,7 @@ public class CustomToast extends Toast {
         mToastBackgroundColor = color;
         return this;
     }
+
     public CustomToast setToastBackground(ToastBackgroundType type){
         Drawable drawableBg;
         switch (type){
@@ -169,19 +217,10 @@ public class CustomToast extends Toast {
         return setToastBackground(drawableBg);
     }
 
-    public static float convertDpToPixel(float dp, Context context){
-        Resources resources = context.getResources();
-        DisplayMetrics metrics = resources.getDisplayMetrics();
-        float px = dp * ((float)metrics.densityDpi / DisplayMetrics.DENSITY_DEFAULT);
-        return px;
-    }
-
-
     public CustomToast setToastTextColor(@ColorInt int textColor){
         mToastTextColor = textColor;
         return this;
     }
-
 
     public CustomToast setToastTextSizeWithUnit(int size,int type){
         switch (type){
@@ -227,22 +266,22 @@ public class CustomToast extends Toast {
                 gravityFlag = Gravity.CENTER;
                 break;
             case TOP_RIGHT:
-                gravityFlag = Gravity.TOP |Gravity.RIGHT;
+                gravityFlag = Gravity.TOP | Gravity.END;
                 break;
             case TOP_LEFT:
-                gravityFlag = Gravity.TOP|Gravity.LEFT;
+                gravityFlag = Gravity.TOP | Gravity.START;
                 break;
             case BOTTOM_LEFT:
-                gravityFlag = Gravity.BOTTOM|Gravity.LEFT;
+                gravityFlag = Gravity.BOTTOM | Gravity.START;
                 break;
             case BOTTOM_RIGHT:
-                gravityFlag = Gravity.BOTTOM| Gravity.RIGHT;
+                gravityFlag = Gravity.BOTTOM | Gravity.END;
                 break;
             case RIGHT:
-                gravityFlag = Gravity.RIGHT;
+                gravityFlag = Gravity.END;
                 break;
             case LEFT:
-                gravityFlag = Gravity.LEFT;
+                gravityFlag = Gravity.START;
                 break;
             case TOP:
                 gravityFlag =Gravity.TOP;
@@ -260,66 +299,23 @@ public class CustomToast extends Toast {
 
 
 
-    public static CustomToast getInstantToast(@NonNull Context context,@NonNull InstantToastType type){
-        CustomToast customToast = new CustomToast(context);
-        customToast.setIconPosition(IconPosition.START);
-        customToast.setToastPosition(ToastPosition.BOTTOM);
-        customToast.setToastBackground(ToastBackgroundType.ROUNDED_CORNERS);
-        customToast.setToastTextColor(Color.WHITE);
-        switch (type){
-            case SUCCESS:
-                customToast.setToastText(R.string.success_message);
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    customToast.setToastIcon(context.getResources().getDrawable(R.drawable.ic_vector_custom_toast_success_icon,null));
-                }else {
-                    customToast.setToastIcon(context.getResources().getDrawable(R.drawable.ic_vector_custom_toast_success_icon));
-                }
-                customToast.setToastBackgroundColor(Color.parseColor("#21c23c"));
-                break;
-            case ERROR:
-                customToast.setToastText(R.string.error_message);
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    customToast.setToastIcon(context.getResources().getDrawable(R.drawable.ic_vector_custom_toast_error_icon,null));
-                }else {
-                    customToast.setToastIcon(context.getResources().getDrawable(R.drawable.ic_vector_custom_toast_error_icon));
-                }
-                customToast.setToastBackgroundColor(Color.parseColor("#ff5858"));
-                break;
-            case WARNING:
-                customToast.setToastText(R.string.warning_message);
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    customToast.setToastIcon(context.getResources().getDrawable(R.drawable.ic_vector_custom_toast_warning_icon,null));
-                }else {
-                    customToast.setToastIcon(context.getResources().getDrawable(R.drawable.ic_vector_custom_toast_warning_icon));
-                }
-                customToast.setToastBackgroundColor(Color.parseColor("#ffa21c"));
-                break;
-            case NORMAL:
-                customToast.setToastText(R.string.toast_message);
-                break;
-        }
-        return customToast;
-    }
-
-
-
 
     public enum InstantToastType{
-          SUCCESS
+        SUCCESS
         , ERROR
         , WARNING
         , NORMAL
     }
 
     public enum ToastBackgroundType{
-          OVAL
+        OVAL
 //        , CIRCLE
         , ROUNDED_CORNERS
         , RECTANGLE
     }
 
     public enum ToastPosition{
-          TOP
+        TOP
         , BOTTOM
         , RIGHT
         , LEFT
@@ -330,7 +326,7 @@ public class CustomToast extends Toast {
         , CENTER
     }
     public enum IconPosition{
-          TOP
+        TOP
         , START
         , END
         , BOTTOM
