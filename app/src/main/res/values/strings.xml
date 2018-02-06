@@ -1,5 +1,9 @@
 <resources>
     <string name="app_name">WebkulCustomToast</string>
     <string name="my_dummy_text"> Dummy Toast Text</string>
+    <string name="show_custom_toast">show Custom Toast</string>
+    <string name="show_instant_success_toast">show Instant Success Toast</string>
+    <string name="show_instant_warning_toast">show Instant Warning Toast</string>
+    <string name="show_instant_error_toast">show Instant Error Toast</string>
 
 </resources>
