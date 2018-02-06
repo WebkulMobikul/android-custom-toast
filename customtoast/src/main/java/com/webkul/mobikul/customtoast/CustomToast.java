@@ -301,21 +301,21 @@ public class CustomToast extends Toast {
 
 
     public enum InstantToastType{
-          SUCCESS
+        SUCCESS
         , ERROR
         , WARNING
         , NORMAL
     }
 
     public enum ToastBackgroundType{
-          OVAL
+        OVAL
 //        , CIRCLE
         , ROUNDED_CORNERS
         , RECTANGLE
     }
 
     public enum ToastPosition{
-          TOP
+        TOP
         , BOTTOM
         , RIGHT
         , LEFT
@@ -326,7 +326,7 @@ public class CustomToast extends Toast {
         , CENTER
     }
     public enum IconPosition{
-          TOP
+        TOP
         , START
         , END
         , BOTTOM
