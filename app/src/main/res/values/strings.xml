@@ -5,5 +5,4 @@
     <string name="show_instant_success_toast">show Instant Success Toast</string>
     <string name="show_instant_warning_toast">show Instant Warning Toast</string>
     <string name="show_instant_error_toast">show Instant Error Toast</string>
-
 </resources>
