@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="customtoast-1.0.2">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.android/build-cache/f8a513d2e18bac2e0a8f8374710a6465fd90ba55/output/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.android/build-cache/f8a513d2e18bac2e0a8f8374710a6465fd90ba55/output/res" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.webkul.mobikul/customtoast/1.0.2/a83ba2815530778d3bfd26fed8dba1b3513df78d/customtoast-1.0.2-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
