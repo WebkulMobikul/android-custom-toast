@@ -14,7 +14,7 @@ This library helps you create the toasts and change thier visuals as per your ne
 Add this line in your `module level build.gradle` file
 
 ```
-  compile 'com.webkul.mobikul:customtoast:1.0.1'
+  compile 'com.webkul.mobikul:customtoast:1.0.2'
 ```
 
 :exclamation:  `Make Sure Databinding is set to true in your project`

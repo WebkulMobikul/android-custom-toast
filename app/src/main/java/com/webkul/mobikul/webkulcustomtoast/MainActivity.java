@@ -20,16 +20,16 @@ public class MainActivity extends AppCompatActivity {
 
     public void showCustomToast(View view){
         CustomToast customToast = new CustomToast(this);
-        customToast.setToastPosition(CustomToast.ToastPosition.CENTER);
-        customToast.setToastIcon(getResources().getDrawable(android.R.drawable.btn_star));
-        customToast.setToastIcon(ContextCompat.getDrawable(this, android.R.drawable.btn_star));
-        customToast.setIconPosition(CustomToast.IconPosition.END);
-        customToast.setToastText(R.string.my_dummy_text);
-        customToast.setTextSize(12, TypedValue.COMPLEX_UNIT_DIP);
-        customToast.setToastBackground(CustomToast.ToastBackgroundType.ROUNDED_CORNERS);
-        customToast.setToastBackgroundColor(Color.BLUE);
-        customToast.setToastTextColor(Color.WHITE);
-        customToast.show();
+        customToast.setToastPosition(CustomToast.ToastPosition.CENTER)
+                .setToastIcon(ContextCompat.getDrawable(this, android.R.drawable.btn_star))
+                .setIconPosition(CustomToast.IconPosition.END)
+                .setToastText(R.string.my_dummy_text)
+                .setTextSize(12, TypedValue.COMPLEX_UNIT_DIP)
+                .setToastBackground(CustomToast.ToastBackgroundType.ROUNDED_CORNERS)
+                .setToastBackgroundColor(Color.BLUE)
+                .setToastTextColor(Color.WHITE)
+                .show();
+
     }
 
 
